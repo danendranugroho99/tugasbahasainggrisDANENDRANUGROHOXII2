@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Moment the Heart Beats Faster During Extreme Fear</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #020617;
+      --card: #0f172a;
+      --accent: #38bdf8;
+      --accent2: #22c55e;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --heart: #ef4444;
+    }
+
+    * { box-sizing: border-box; font-family: "Segoe UI", system-ui, -apple-system, sans-serif; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #020617, #0f172a);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 50px 20px 30px;
+      text-align: center;
+      background: radial-gradient(circle at top, #1e3a8a, #020617 70%);
+      position: relative;
+    }
+
+    header h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      margin-bottom: 10px;
+      color: #e0f2fe;
+      animation: titlePulse 2s infinite;
+    }
+
+    @keyframes titlePulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    header p { color: var(--muted); max-width: 900px; margin: 0 auto 16px; }
+
+    .student-card {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 12px 20px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid #1f2933;
+      animation: fadeDown 0.8s ease;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+    .tabs {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; animation: fadeIn 0.8s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .tab-btn {
+      background: #020617; border: 1px solid #1f2933; color: var(--text);
+      padding: 10px 16px; border-radius: 10px; cursor: pointer; transition: 0.2s;
+    }
+    .tab-btn.active { background: var(--accent); color: #020617; border-color: var(--accent); font-weight: bold; }
+    .tab-btn:hover { transform: translateY(-2px); }
+
+    .card {
+      background: rgba(17, 24, 39, 0.85);
+      border: 1px solid #1f2933;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      animation: slideUp 0.5s ease;
+    }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    h2 { color: var(--accent); margin-top: 0; }
+    h3 { color: #a5f3fc; margin-bottom: 6px; }
+    p { line-height: 1.75; color: #e5e7eb; }
+    .highlight { color: var(--accent2); font-weight: 600; }
+
+    .grid {
+      display: grid; grid-template-columns: 1fr; gap: 16px;
+    }
+    @media (min-width: 900px) {
+      .grid { grid-template-columns: 1.1fr 0.9fr; }
+    }
+
+    /* Heart animation box */
+    .heart-wrap {
+      display: flex; align-items: center; justify-content: center; gap: 16px; flex-direction: column;
+      background: #020617; border: 1px solid #1f2933; border-radius: 14px; padding: 20px;
+    }
+
+    .heart {
+      width: 120px; height: 120px; position: relative; transform: rotate(-45deg);
+      animation: beat 1s infinite;
+      filter: drop-shadow(0 0 8px rgba(239,68,68,0.6));
+    }
+    .heart:before, .heart:after {
+      content: "";
+      position: absolute;
+      width: 120px; height: 120px;
+      background: var(--heart);
+      border-radius: 50%;
+    }
+    .heart:before { top: -60px; left: 0; }
+    .heart:after { left: 60px; top: 0; }
+
+    @keyframes beat {
+      0% { transform: rotate(-45deg) scale(1); }
+      20% { transform: rotate(-45deg) scale(1.08); }
+      40% { transform: rotate(-45deg) scale(1); }
+      60% { transform: rotate(-45deg) scale(1.12); }
+      80% { transform: rotate(-45deg) scale(1); }
+      100% { transform: rotate(-45deg) scale(1); }
+    }
+
+    .bpm {
+      font-size: 2rem; font-weight: 800; letter-spacing: 0.5px; color: #fecaca;
+    }
+    .bpm small { color: var(--muted); font-weight: 500; font-size: 0.9rem; }
+
+    .controls {
+      display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    }
+    .btn {
+      padding: 10px 16px; border-radius: 10px; border: none; cursor: pointer;
+      background: var(--accent); color: #020617; font-weight: bold; transition: 0.2s;
+    }
+    .btn.secondary { background: var(--accent2); }
+    .btn:hover { transform: scale(1.05); }
+
+    .bar-container {
+      background: #020617; border: 1px solid #1f2933; border-radius: 10px; overflow: hidden; width: 100%;
+    }
+    .bar {
+      height: 18px; width: 40%;
+      background: linear-gradient(90deg, #22c55e, #38bdf8);
+      transition: width 0.6s ease;
+      animation: glow 2s infinite;
+    }
+    @keyframes glow { 0% { filter: brightness(1); } 50% { filter: brightness(1.4); } 100% { filter: brightness(1); } }
+
+    footer { text-align: center; padding: 30px 20px; color: var(--muted); font-size: 0.9rem; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>The Moment the Heart Beats Faster During Extreme Fear</h1>
+    <p>An interactive explanation text about how and why the human heart suddenly beats faster when facing extreme fear.</p>
+    <div class="student-card">
+      <strong>Name:</strong> DANENDRA NUGROHO<br>
+      <strong>Class:</strong> XII-2<br>
+      <strong>Absent:</strong> 10
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="openTab('general', this)">General Statement</button>
+      <button class="tab-btn" onclick="openTab('process', this)">Process</button>
+      <button class="tab-btn" onclick="openTab('mechanism', this)">Body Mechanism</button>
+      <button class="tab-btn" onclick="openTab('impact', this)">Effects</button>
+      <button class="tab-btn" onclick="openTab('conclusion', this)">Conclusion</button>
+      <button class="tab-btn" onclick="openTab('interactive', this)">Interactive</button>
+    </div>
+
+    <div id="general" class="card">
+      <h2>General Statement</h2>
+      <p>
+        Extreme fear is a strong emotional response that appears when a person feels that they are in danger. This response is not something that happens by accident. It is a natural reaction that has developed in humans to help them survive in threatening situations. One of the most visible signs of this reaction is that the <span class="highlight">heart beats faster</span> than usual.
+      </p>
+      <p>
+        In daily life, the heart normally beats at a steady rhythm to supply oxygen and nutrients to the body. However, when a person suddenly feels afraid, the body needs more energy in a very short time. Because of this, the heart must work faster to support the body. This condition is commonly known as part of the <span class="highlight">fight-or-flight response</span>.
+      </p>
+      <p>
+        This explanation text will describe in detail how fear is detected by the body, how the brain sends signals, how the heart reacts, and what effects this process has on the human body.
+      </p>
+    </div>
+
+    <div id="process" class="card hidden">
+      <h2>Process of the Fear Response</h2>
+      <h3>1. Detection of Danger</h3>
+      <p>
+        The process begins when the senses, such as the eyes or ears, detect something that is considered dangerous. This information is sent to the brain, especially to the part that controls emotions and survival responses.
+      </p>
+      <h3>2. Signal from the Brain</h3>
+      <p>
+        After recognizing the threat, the brain immediately sends warning signals to the nervous system. This happens very quickly, even before a person has time to think clearly about the situation.
+      </p>
+      <h3>3. Release of Stress Hormones</h3>
+      <p>
+        Next, the body releases stress hormones, such as adrenaline, into the bloodstream. These hormones act as messengers that prepare many organs, including the heart, to work harder and faster.
+      </p>
+    </div>
+
+    <div id="mechanism" class="card hidden">
+      <h2>Body Mechanism: Why the Heart Beats Faster</h2>
+      <p>
+        When adrenaline reaches the heart, it causes the heart muscle to contract more quickly and more strongly. As a result, the number of heartbeats per minute increases. This condition is known as an increase in heart rate.
+      </p>
+      <p>
+        A faster heart rate means that more blood is pumped through the body in a shorter time. This blood carries oxygen and nutrients that are especially needed by the muscles and the brain. With enough oxygen, the muscles can move faster and with more power, which is useful if the person needs to run away or protect themselves.
+      </p>
+      <p>
+        At the same time, breathing usually becomes faster, and the body becomes more alert. All of these changes work together as one system to help the body face or escape from danger.
+      </p>
+    </div>
+
+    <div id="impact" class="card hidden">
+      <h2>Effects on the Body</h2>
+      <p>
+        The faster heartbeat during extreme fear has several important effects. First, it improves blood circulation to vital organs. Second, it increases the supply of oxygen to the muscles, which makes the body stronger and faster for a short time.
+      </p>
+      <p>
+        However, this reaction also uses a lot of energy. That is why a person may feel tired after the fear has passed. Even so, this response is not harmful in normal situations. Instead, it shows that the body’s protection system is working properly.
+      </p>
+      <p>
+        In conclusion, although a fast heartbeat can feel uncomfortable, it is actually a helpful and necessary reaction for human survival.
+      </p>
+    </div>
+
+    <div id="conclusion" class="card hidden">
+      <h2>Conclusion</h2>
+      <p>
+        The moment the heart beats faster during extreme fear is a natural biological process. It starts from the detection of danger, continues with signals from the brain, and ends with the release of hormones that make the heart work faster.
+      </p>
+      <p>
+        This process proves that the human body is designed to protect itself in dangerous situations. Therefore, a rapid heartbeat during fear should not be seen as a weakness, but as a sign that the body is responding correctly to a threat.
+      </p>
+    </div>
+
+    <div id="interactive" class="card hidden">
+      <h2>Interactive Section: Heart Beat Simulation</h2>
+      <div class="grid">
+        <div>
+          <p>
+            This simulation shows how the heart rate changes in different conditions. The number displayed is the <strong>heart rate in BPM (beats per minute)</strong>. When the BPM increases, the heart animation will beat faster.
+          </p>
+          <div class="bar-container">
+            <div id="heartBar" class="bar"></div>
+          </div>
+          <p id="statusText" style="margin-top:10px;">Status: Normal heart rate</p>
+          <div class="controls">
+            <button class="btn" onclick="setMode('normal')">Normal</button>
+            <button class="btn secondary" onclick="setMode('alert')">Alert</button>
+            <button class="btn" onclick="setMode('fear')">Extreme Fear</button>
+          </div>
+        </div>
+        <div class="heart-wrap">
+          <div id="heart" class="heart"></div>
+          <div class="bpm"><span id="bpmValue">72</span> <small>BPM</small></div>
+          <small style="color: var(--muted);">The animation speed follows the BPM value</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Explanation Text Project • Created by DANENDRA NUGROHO (XII-2 / 10)</p>
+  </footer>
+
+  <script>
+    function openTab(id, btn) {
+      const tabs = ["general", "process", "mechanism", "impact", "conclusion", "interactive"];
+      tabs.forEach(tab => document.getElementById(tab).classList.add("hidden"));
+      document.getElementById(id).classList.remove("hidden");
+      const buttons = document.querySelectorAll(".tab-btn");
+      buttons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    }
+
+    const heartEl = document.getElementById("heart");
+    const bpmEl = document.getElementById("bpmValue");
+    const barEl = document.getElementById("heartBar");
+    const statusEl = document.getElementById("statusText");
+
+    function setBeatSpeed(bpm) {
+      bpmEl.textContent = bpm;
+      const secondsPerBeat = 60 / bpm;
+      heartEl.style.animationDuration = secondsPerBeat + "s";
+      const width = Math.min(bpm, 140) / 140 * 100;
+      barEl.style.width = width + "%";
+    }
+
+    function setMode(mode) {
+      if (mode === "normal") {
+        const bpm = randBetween(60, 80);
+        setBeatSpeed(bpm);
+        statusEl.textContent = "Status: Normal heart rate";
+      } else if (mode === "alert") {
+        const bpm = randBetween(85, 105);
+        setBeatSpeed(bpm);
+        statusEl.textContent = "Status: Faster heart rate (alert)";
+      } else if (mode === "fear") {
+        const bpm = randBetween(110, 135);
+        setBeatSpeed(bpm);
+        statusEl.textContent = "Status: Very fast heart rate (extreme fear response)";
+      }
+    }
+
+    function randBetween(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // init
+    setMode("normal");
+  </script>
+</body>
+</html>
